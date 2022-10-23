@@ -1,0 +1,24 @@
+{
+  "name": "ao-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "bin": {
+    "ao": "./bin/index.js",
+    "ao-cli": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Eddy Hsu",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "4.0.0",
+    "commander": "^9.4.1",
+    "figlet": "^1.5.2",
+    "fs-extra": "^10.1.0",
+    "inquirer": "8.0.0",
+    "ora": "5.0.0"
+  }
+}
