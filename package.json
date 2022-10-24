@@ -1,7 +1,7 @@
 {
   "name": "ao-cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "one click to download",
   "main": "index.js",
   "bin": {
     "ao": "./bin/index.js",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "chalk": "4.0.0",
+    "cli-table": "^0.3.11",
     "commander": "^9.4.1",
     "figlet": "^1.5.2",
     "fs-extra": "^10.1.0",
