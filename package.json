@@ -1,25 +1,44 @@
 {
   "name": "ao-cli",
-  "version": "1.0.0",
-  "description": "one click to download",
-  "main": "index.js",
+  "version": "2.0.0-1",
+  "description": "Personal Development Cli",
+  "type": "module",
   "bin": {
-    "ao": "./bin/index.js",
-    "ao-cli": "./bin/index.js"
+    "ao": "dist/index.js",
+    "ao-cli": "dist/index.js"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "tsup --watch --sourcemap",
+    "build": "tsup",
+    "typecheck": "tsc --noEmit"
   },
-  "keywords": [],
+  "files": [
+    "dist",
+    "src"
+  ],
+  "keywords": [
+    "cli"
+  ],
   "author": "Eddy Hsu",
-  "license": "ISC",
+  "license": "MIT",
+  "devDependencies": {
+    "@eslint/js": "^9.1.1",
+    "@types/cli-table": "^0.3.4",
+    "@types/node": "^20.12.5",
+    "@types/progress": "^2.0.7",
+    "@types/prompts": "^2.4.9",
+    "eslint": "^8.57.0",
+    "globals": "^15.0.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.4.4",
+    "typescript-eslint": "^7.7.1"
+  },
   "dependencies": {
-    "chalk": "4.0.0",
+    "cac": "^6.7.14",
     "cli-table": "^0.3.11",
-    "commander": "^9.4.1",
-    "figlet": "^1.5.2",
-    "fs-extra": "^10.1.0",
-    "inquirer": "8.0.0",
-    "ora": "5.0.0"
+    "ftp-deploy": "^2.4.7",
+    "picocolors": "^1.1.1",
+    "progress": "^2.0.3",
+    "prompts": "^2.4.2"
   }
 }
