@@ -3,6 +3,7 @@ import { cac } from 'cac'
 import { name, version } from '../../package.json'
 
 import checkNpmVersions from '@/lib/checkNpmVersions'
+import customInstruction from '@/lib/customInstruction'
 
 const [CLI_NAME, CLI_VERSIONS] = [name, version]
 const cli = cac(CLI_NAME)
@@ -12,5 +13,13 @@ cli
   .option('-l, --list', '所有版本')
   .option('-r, --registry [path]', 'npm源')
   .action(checkNpmVersions)
+
+cli
+  .command('command [instruction]', '自定义指令')
+  .option('-c, --create [content]', '新增指令')
+  .option('-d, --delete', '删除指定指令')
+  .option('--delete-all', '删除全部指令')
+  .option('-l, --list', '查看全部指令')
+  .action(customInstruction)
 
 cli.version(CLI_VERSIONS).help().parse()

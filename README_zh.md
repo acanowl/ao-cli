@@ -2,7 +2,7 @@
 
 这是一个 Nodejs CLI 应用程序开发模板, 它使用了 typescript 作为开发语言, tsup 作为构建工具
 
-[English](https://github.com/hacxy/cli-tsup-template?tab=readme-ov-file#cli-tsup-template) | 简体中文
+[English](https://github.com/acanowl/ao-cli?tab=readme-ov-file#cli-tsup-template) | 简体中文
 
 ## 先决条件
 
@@ -10,30 +10,9 @@
 
 ## 使用模板
 
-### 将模板创建至本地
-
-- 您可以使用 [create-ts-frame](https://github.com/hacxy/create-ts-frame) 快速的将项目创建至您的本地
-
-执行创建命令时可以通过选项指定项目名称和模板名称
-
-```sh
-# npm 7+, 需要额外的双破折号:
-npm create ts-frame@latest my-cli-app -- --template cli-tsup
-
-# yarn
-yarn create ts-frame my-cli-app --template cli-tsup
-
-# pnpm
-pnpm create ts-frame my-cli-app --template cli-tsup
-
-# Bun
-bun create ts-frame my-cli-app --template cli-tsup
-```
-
 ### 安装依赖
 
 ```sh
-cd my-cli-project
 npm install
 ```
 
@@ -71,7 +50,7 @@ npm run typecheck
 npm link
 ```
 
-之后您就可以在您的操作系统的所有终端下任意路径下去执行命令: `hello-cli`, 这个命令对应的是该项目下的 `package.json` 文件中 `bin` 选项的值.
+之后您就可以在您的操作系统的所有终端下任意路径下去执行命令: `cli-name`, 这个命令对应的是该项目下的 `package.json` 文件中 `bin` 选项的值.
 
 当您不再需要这个全局链接时, 您可以手动移除它, 在项目根目录中执行:
 
@@ -82,3 +61,34 @@ npm unlink -g
 ### 依赖性说明
 
 当您的第三方库以开发时依赖 (DevDependencies) 进行安装时, 执行`npm run build` 会将这些依赖打包进生产环境代码中, 如果您使用此方式安装并构建完成后, 发现程序工作异常, 则应该尝试将其作为生产环境依赖 (Dependencies) 进行安装, 当作为生产环境依赖进行安装时, 它们不会被打包进生产环境代码中.
+
+## 用法
+
+### ao ver [...nodeName] 检查依赖版本
+
+| 指令         | 内容                                |
+| ------------ | ----------------------------------- |
+| 检查依赖版本 | ao ver                              |
+|              | ao ver [nodeName]                   |
+|              | ao ver [nodeName] [nodeName] ...    |
+| 查看所有列表 | ao ver -l                           |
+|              | ao ver [nodeName] -l                |
+|              | ao ver [nodeName] --list            |
+| 更新 npm 源  | ao ver -r                           |
+|              | ao ver [nodeName] -r=[path]         |
+|              | ao ver [nodeName] --registry=[path] |
+
+### ao command [instruction] 自定义指令
+
+| 指令               | 内容                                        |
+| ------------------ | ------------------------------------------- |
+| 新增自定义指令     | ao command                                  |
+|                    | ao command [instruction]                    |
+|                    | ao command [instruction] -c [command]       |
+|                    | ao command [instruction] --create [command] |
+| 删除指定自定义指令 | ao command -d                               |
+|                    | ao command --delete                         |
+|                    | ao command [instruction] --delete           |
+| 删除全部自定义指令 | ao command --delete-all                     |
+| 查看自定义指令     | ao command -l                               |
+|                    | ao command --list                           |
