@@ -1,7 +1,7 @@
 import { existsSync, mkdir, readFile, writeFile } from 'fs'
 import { promisify } from 'util'
 import { fileURLToPath } from 'url'
-import { CAHCE_INSTRUCT_KEY } from '@/config'
+import { CACHE_INSTRUCT_KEY } from '@/config'
 import { PlainObject } from '@/typing'
 
 const readFileAsync = promisify(readFile)
@@ -46,7 +46,7 @@ const useCache = (fileName: string) => {
 }
 
 export const useInstructCache = () => {
-  const { getCache, setCache } = useCache(CAHCE_INSTRUCT_KEY)
+  const { getCache, setCache } = useCache(CACHE_INSTRUCT_KEY)
 
   const getInstructCacheByKey = async (key: string) => {
     const instructionJson = await getCache()
