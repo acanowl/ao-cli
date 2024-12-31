@@ -3,7 +3,6 @@ import prompts, { PromptObject } from 'prompts'
 type PromptOptionType = PromptObject<string>
 
 export const usePrompts = async (option: PromptOptionType | PromptOptionType[]) => {
-  console.log(option)
   const result = await prompts(option)
   return Array.isArray(option) ? result : result[option.name as keyof typeof result]
 }
