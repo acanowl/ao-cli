@@ -1,5 +1,4 @@
-import { useExecCommand } from '@/hooks/useExecCommand'
-import { useInputPrompts } from '@/hooks/usePrompts'
+import { useExecCommand, useInputPrompts } from '@/hooks'
 import type { PlainObject } from '@/typing'
 import { isBoolean } from '@/util/valid'
 

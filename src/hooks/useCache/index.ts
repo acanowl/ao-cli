@@ -1,14 +1,13 @@
 import { existsSync, mkdir, readFile, writeFile } from 'fs'
 import { promisify } from 'util'
 import { fileURLToPath } from 'url'
-import { CACHE_INSTRUCT_KEY } from '@/config'
-import { PlainObject } from '@/typing'
+import type { PlainObject } from '@/typing'
 
 const readFileAsync = promisify(readFile)
 const writeFileAsync = promisify(writeFile)
 const mkdirAsync = promisify(mkdir)
 
-const useCache = (fileName: string) => {
+export const useCache = (fileName: string) => {
   const cacheFilePath = fileURLToPath(new URL('../cache', import.meta.url))
   const cacheJsonPath = fileURLToPath(new URL(`../cache/${fileName}.json`, import.meta.url))
 
@@ -34,6 +33,10 @@ const useCache = (fileName: string) => {
     }
     return cacheJsonString
   }
+  const getCacheByKey = async (key: string) => {
+    const cacheJson = await getCache()
+    return cacheJson[key]
+  }
   const setCache = async (params: PlainObject, cover: boolean = false): Promise<PlainObject> => {
     const cacheJson = await getCache()
     Object.assign(cacheJson, params)
@@ -42,15 +45,5 @@ const useCache = (fileName: string) => {
     await writeFileAsync(cacheJsonPath, willUpdatedContent, 'utf8')
     return result
   }
-  return { getCache, setCache }
-}
-
-export const useInstructCache = () => {
-  const { getCache, setCache } = useCache(CACHE_INSTRUCT_KEY)
-
-  const getInstructCacheByKey = async (key: string) => {
-    const instructionJson = await getCache()
-    return instructionJson[key]
-  }
-  return { getInstructCache: getCache, getInstructCacheByKey, setInstructCache: setCache }
+  return { getCache, getCacheByKey, setCache }
 }

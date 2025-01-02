@@ -22,8 +22,6 @@ export const isDate = (value: unknown): value is Date => getObjectType(value) ==
 
 export const isRegExp = (value: unknown): value is RegExp => getObjectType(value) === 'RegExp'
 
-export const isDefined = <T>(value: T | undefined | null): value is T => {
-  return value !== null && value !== undefined
-}
+export const isDefined = <T>(value: T | undefined | null): value is T => value !== null && value !== undefined
 
 export const isNull = (value: unknown): value is null => value === null

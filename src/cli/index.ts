@@ -2,8 +2,7 @@ import { cac } from 'cac'
 
 import { name, version } from '../../package.json'
 
-import checkNpmVersions from '@/lib/checkNpmVersions'
-import customInstruction from '@/lib/customInstruction'
+import { checkNpmVersions, customInstruction } from '@/lib'
 
 const [CLI_NAME, CLI_VERSIONS] = [name, version]
 const cli = cac(CLI_NAME)

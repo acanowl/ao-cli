@@ -1,16 +1,14 @@
 import pc from 'picocolors'
 import { Choice } from 'prompts'
 import { isArray, isString } from '@/util/valid'
-import { useInstructCache } from '@/hooks/useCache'
-import { useCheckboxPrompts, useConfirmPrompts, useInputPrompts } from '@/hooks/usePrompts'
-import { useCliTable } from '@/hooks/useCliTable'
+import { useCache, useCheckboxPrompts, useConfirmPrompts, useInputPrompts, useCliTable } from '@/hooks'
 import type { PlainObject } from '@/typing'
-import { CLI_KEY } from '@/config'
+import { CACHE_INSTRUCT_KEY, CLI_KEY } from '@/config'
 
-const { getInstructCache, setInstructCache } = useInstructCache()
+const { getCache, setCache } = useCache(CACHE_INSTRUCT_KEY)
 
 const customInstruction = async (instruction: string, options: PlainObject<string>) => {
-  const instructionJson = await getInstructCache()
+  const instructionJson = await getCache()
 
   try {
     const { create, delete: del, deleteAll, list } = options
@@ -41,7 +39,7 @@ const customInstruction = async (instruction: string, options: PlainObject<strin
         } else {
           delete instructionJson[instruction]
         }
-        const cacheJson = await setInstructCache(instructionJson, true)
+        const cacheJson = await setCache(instructionJson, true)
         console.log(useCliTable(cacheJson))
         console.log(`已删除 ${pc.cyan(`${CLI_KEY} ${instruction}`)} 指令`)
       }
@@ -51,7 +49,7 @@ const customInstruction = async (instruction: string, options: PlainObject<strin
     if (deleteAll) {
       const isDeleteAll = await useConfirmPrompts({ message: '是否删除所有自定义指令?', initial: false })
       if (isDeleteAll) {
-        await setInstructCache({}, true)
+        await setCache({}, true)
         console.log('已删除所有指令')
       }
       return
@@ -68,7 +66,7 @@ const customInstruction = async (instruction: string, options: PlainObject<strin
     }
     // useInputPrompts 取消操作返回undefined
     if (command) {
-      const cacheJson = await setInstructCache({ [instruction]: command })
+      const cacheJson = await setCache({ [instruction]: command })
       console.log(useCliTable(cacheJson))
       console.log(`新增指令成功，可通过 ${pc.cyan(`${CLI_KEY} ${instruction}`)} 执行`)
     }
